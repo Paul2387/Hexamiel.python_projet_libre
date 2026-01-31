@@ -1,8 +1,70 @@
 {% extends 'front/base.html' %}
 {% block content %}
 <main>
+    <div class="bg-gradient-to-r from-yellow-500 to-yellow-100">
+        <section class="grid grid-cols-3 grid-rows-0">
 
-    <h1>Test</h1>
+            <section class="justify-left">
+                <img src="..\static\images\image_page_acceuil.jpg" style="width:800px;height:500px" class=" p-8 rounded-lg"><img>
+            </section>
+
+            <section>
+                <h1 class="flex justify-center font-bold font-serif text-3xl">Hexamiel, le meilleur du miel local</h1>
+            </section>
+
+        </section>
+
+    </div>
+
+    <div class="flex justift-center p-6 bg-yellow-100">
+    <h1 class="font-bold font-serif text-l">Miels à l'affiche</h1>
+    </div>
+
+    <div class="grid grid-cols-3 grid-rows-0 gap-4 p-8" >
+
+
+            {% for Produit in Produits[:3]%}
+
+            <section class="rounded-md p-6  bg-yellow-300">
+                <p class="flex justify-center">Photo du miel</p>
+                <h2 class="flex justify-center">{{Produits["product_name"]}}</h2> 
+                <hr> 
+                <p class="flex justify-center">{{Produits["price"]}}€</p>
+                <p> crée par {{Produits["user"]}}</p>
+            </section>
+
+            {%endfor%}
+    </div>
+
+    <div class="flex justift-center p-6 bg-yellow-100">
+    <h1 class="font-bold font-serif text-l">Apiculteurs à l'affiche</h1>
+    </div>
+
+    <div class="flex justify-around p-6" >
+
+        {% for Api in range(3) %}
+
+             <section class="rounded-md p-6  bg-yellow-300">
+                 <p class="flex justify-center">Photo de profil</p>
+                <hr> 
+                <h2 class="flex justify-center">{{Api["name"]}}</h2>
+                <p>{{Api["Email"]}}</p>
+            </section>
+
+            {%endfor%}
+
+
+            
+    </div>
+
+       
+
+    <div class="flex justify-center p-10 bg-yellow-100">
+
+        <button class="rounded-md p-6  bg-yellow-400 font-bold font-serif text-l ">se connecter en tant qu'apiculteur</button>
+
+
+    </div>
 
 </main>
 

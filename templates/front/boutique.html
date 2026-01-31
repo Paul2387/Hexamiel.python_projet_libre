@@ -1,0 +1,35 @@
+{% extends 'front/base.html' %}
+{% block content %}
+
+
+<form action = "/search" method = "get" class="flex justify-center">
+        <input type = "text" name = "q" placeholder = "Recherche" class="">
+        <button type = "submit" class="">🔎</button>
+    </form>  
+
+
+<section class="grid grid-cols-4 grid-rows-2 gap-3 p-8">
+    
+        {% for Produit in Produits %}
+
+        <section class="rounded-md p-6  bg-yellow-300">
+                <p class="flex justify-center">Photo du miel</p>
+                <h2 class="flex justify-center">{{Produits["product_name"]}}</h2> 
+                <hr> 
+                <p class="flex justify-center">{{Produits["price"]}}€</p>
+                <p> crée par {{Produits["user"]}}</p>
+            </section>
+            {% endfor %}
+
+</section>
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
