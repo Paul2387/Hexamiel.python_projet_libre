@@ -1,14 +1,14 @@
 {% extends 'front/base.html' %}
 {% block content %}
 <main>
-    <div class="bg-gradient-to-r from-yellow-500 to-yellow-100">
+    <div class="bg-gradient-to-r from-yellow-500 to-yellow-100 rounded-lg">
         <section class="grid grid-cols-3 grid-rows-0">
 
             <section class="justify-left">
                 <img src="..\static\images\image_page_acceuil.jpg" style="width:800px;height:500px" class=" p-8 rounded-lg"><img>
             </section>
 
-            <section>
+            <section class="flex justify-center">
                 <h1 class="flex justify-center font-bold font-serif text-3xl">Hexamiel, le meilleur du miel local</h1>
             </section>
 
@@ -25,12 +25,12 @@
 
             {% for Produit in Produits[:3]%}
 
-            <section class="rounded-md p-6  bg-yellow-300">
+            <section class="rounded-md p-6  bg-yellow-200 border-2 border-yellow-300">
                 <p class="flex justify-center">Photo du miel</p>
-                <h2 class="flex justify-center">{{Produits["product_name"]}}</h2> 
+                <h2 class="flex justify-center">{{Produits["nom"]}}</h2> 
                 <hr> 
-                <p class="flex justify-center">{{Produits["price"]}}€</p>
-                <p> crée par {{Produits["user"]}}</p>
+                <p class="flex justify-center">{{Produits["prix"]}}€</p>
+                <p> crée par {{Produits["api"]}}</p>
             </section>
 
             {%endfor%}
@@ -42,13 +42,13 @@
 
     <div class="flex justify-around p-6" >
 
-        {% for Api in range(3) %}
+        {% for Apiculteur in Apiculteurs[:3] %}
 
              <section class="rounded-md p-6  bg-yellow-300">
-                 <p class="flex justify-center">Photo de profil</p>
+                 <img scr="{Apiculteur.image}" class="flex justify-center"> <img>
                 <hr> 
-                <h2 class="flex justify-center">{{Api["name"]}}</h2>
-                <p>{{Api["Email"]}}</p>
+                <h2 class="flex justify-center">{{Apiculteur["nom"]}}</h2>
+                <p>{{Apiculteur["contact"]}}</p>
             </section>
 
             {%endfor%}

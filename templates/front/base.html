@@ -15,16 +15,16 @@
         <ul>
             <section class="grid grid-cols-6 grid-rows-0 gap-6 p-10 font-serif ">
                 {% if session['user'] %} 
-                <li> <a href="index.html">Acceuil</a></li>
-                <li> <a href="boutique.html">Boutique</a></li>
-                <li> <a href="Apiculteur.gen.html">Apiculteur</a></li>
+                <li> <a href="/">Acceuil</a></li>
+                <li> <a href="/boutique">Boutique</a></li>
+                <li> <a href="page_apiculteur.html">Apiculteur</a></li>
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="profil_utilisateur.html">Profil</a></li>
                 {%else%}
                    <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
-                <li> <a href="Apiculteur.gen.html">Apiculteur</a></li>
+                <li> <a href="/page_apiculteur">Apiculteur</a></li>
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="connexion.html">connexion</a></li>
@@ -45,7 +45,7 @@
 
 
 
-    <footer class="bg-yellow-500 flex justify-between rounded-md">
+    <footer class="flex justify-between rounded-md">
         <h1 class= "text-xl rounded-lg p-8 scroll-ml-6 font-serif" style="color:rgb(0, 0, 0)">copyright</h1>
         <nav class="flex space-x-10 text_lg font-semibold" >
         <ul>

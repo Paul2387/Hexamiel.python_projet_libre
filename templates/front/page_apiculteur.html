@@ -11,14 +11,14 @@
 
 <section class="grid grid-cols-3 grid-rows-2 gap-3 p-8">
     
-        {% for Produit in Produits %}
+        {% for Api in Apiculteur %}
 
-        <section class="rounded-md p-6  bg-yellow-200 border-2 border-yellow-600" >
-                <p class="flex justify-center">Photo du miel</p>
-                <h2 class="flex justify-center">{{Produits["nom"]}}</h2> 
+
+             <section class="rounded-md p-6  bg-yellow-300">
+                 <p class="flex justify-center">Photo de profil</p>
                 <hr> 
-                <p class="flex justify-center">{{Produits["prix"]}}€</p>
-                <p> crée par {{Produits["api"]}}</p>
+                <h2 class="flex justify-center">{{Api["name"]}}</h2>
+                <p>contact:{{Api["Email"]}}</p>
             </section>
             {% endfor %}
 
@@ -26,12 +26,3 @@
 </div>
 
 {%endblock%}
-
-
-
-
-
-
-
-
-
