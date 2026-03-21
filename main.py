@@ -46,23 +46,27 @@ def connexion_client():
         if bcrypt.checkpw(request.form["mdp"].encode("utf-8"), Client["mdp"]):
             session['role'] = Client['role']
             session['Client'] = Client["nom"]
+            return redirect ("/")
         else:
             return render_template('connexion_client.html',erreur = "les mots de passe doivent etre identiques")
-        return render_template('front/connexion_client.html',erreur = "les mots de passe doivent etre identiques")
-    else:
-        return render_template("front/connexion_client.html")   
+   
 
 
 
 
+@app.route('/creation_client')
+def creation_client ():
+    return render_template("front/creation_client.html")
 
-@app.route('/creation_client', methods=['POST','GET'])
-def creation_client():
+
+
+@app.route('/insertion_client', methods=['POST','GET'])
+def insertion_client():
 
     if request.method == "POST":
-        db_Client = db["CLient"]
+        db_Client = db["Client"]
         if (db_Client.find_one({"nom" : request.form["Nom"]})):
-            return render_template("creation_client.html", erreur = "ce nom est deja utilisé")
+            return render_template("front/creation_client.html", erreur = "ce nom est deja utilisé")
         else :
             if (request.form["mdp"] == request.form["confirme_mdp"]):
             
@@ -78,13 +82,14 @@ def creation_client():
                 nouvel_utilisateur = {
                     "nom" : nom,
                     "mdp" : mdp_hash,
-                    "contact" : contact
-
+                    "contact" : contact,
+                    "role": "client"
+                    
                 }
     
-    db["CLient"].insert_one(nouvel_utilisateur)
+                db["Client"].insert_one(nouvel_utilisateur)
 
-    return redirect
+                return redirect("/")
 
 
 

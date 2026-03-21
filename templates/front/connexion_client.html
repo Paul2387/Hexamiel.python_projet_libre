@@ -1,9 +1,9 @@
 {% extends 'front/base.html' %}
 {% block content %}
 
-<div class="flex justify-center bg-yellow-200">
-    <form method="POST" action = "" class="border-solid border-2 border-yellow-600 p-6 bg-yellow-200">
-    <p class="justify-center">Connexion</p>
+<section class="flex justify-center bg-yellow-200">
+    <form method="POST" action = "" class="border-solid border-2 border-yellow-400 p-6 bg-yellow-200">
+    <h1 class=" flex justify-center">Connexion</h1>
     <hr>
     <div>
         <label> Nom</label>
@@ -14,13 +14,14 @@
         <label>mot de passe</label>
         <input name="mdp" type="text" placeholder="Entrez votre MDP" class="my-3">
     </div>
+    
     <div>
-        <button type="submit" class="my-10 p-3 rounded bg-yellow-300 border-solid border-2 border-yellow-600">Se connecter</button>
+        <button type="submit" class="my-10 p-3 rounded bg-yellow-300 border-solid border-2 border-yellow-600 flex justify-center">Se connecter</button>
     </div>
 
     </form>
 
-    
+    <hr>
     <div>
         <a href="/creation_client">
             <button  class="my-10 p-3 rounded bg-yellow-300 border-solid border-2 border-yellow-600 active">créer un compte</button>
@@ -28,15 +29,7 @@
     </div>
 
 
-</div>
-
-
-
-
-
-
-
-
+</section>
 
 
 

@@ -14,7 +14,7 @@
     <nav class="flex space-x-10 text_lg " >
         <ul>
             <section class="grid grid-cols-6 grid-rows-0 gap-6 p-10 font-serif ">
-                {% if session['user'] %} 
+                {% if session['role'] == 'client' %} 
                 <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
                 <li> <a href="page_apiculteur.html">Apiculteur</a></li>

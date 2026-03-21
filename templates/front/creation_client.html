@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+{%extends 'front/base.html'%}
 
 {%block content%}
 
@@ -7,7 +7,7 @@
 {%endif%}
 
 <div class="flex justify-center gap-4 p-8 text-xl" >
-    <form method="POST" action = "{{url_for('creation_client')}}" class="border-solid border-2 border-yellow-600 p-6 bg-yellow-200">
+    <form method="POST" action = "{{url_for('insertion_client')}}" class="border-solid border-2 border-yellow-600 p-6 bg-yellow-200">
         <div>
             <label>utilisateur</label>
             <input name="Nom" type="text" placeholder="nom de l'utilisateur" class="my-3">
@@ -26,7 +26,9 @@
             <input name="confirme_mdp" type="text" placeholder="Entrez votre MDP" class="my-3">
         </div>
         <div>
+        
             <button type="submit" class="my-10 p-3 rounded bg-yellow-300 border-solid border-2 border-yellow-600">s'inscrire</button>
+            
         </div>
     </form>
 
