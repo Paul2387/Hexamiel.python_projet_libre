@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
 import bcrypt
+from bson.objectid import ObjectId
 
 
 
@@ -20,7 +21,7 @@ app.secret_key = os.urandom(24)
 def index():
     Produits_data = list(db["Produits"].find({}))
     Api_data = list(db["Apiculteur"].find({}))
-    return render_template('index.html', Produits = Produits_data, Apiculteurs = Api_data)
+    return render_template('index.html', Produits = Produits_data, Apiculteur = Api_data)
 
 
 @app.route("/boutique")
@@ -90,6 +91,34 @@ def insertion_client():
                 db["Client"].insert_one(nouvel_utilisateur)
 
                 return redirect("/")
+
+##Admin##
+@app.route('/admin')
+def admin():
+    Produits_data = list(db["Produits"].find({}))
+    Client_data = list(db["Client"].find({}))
+    if 'Client' in session and session['role'] == 'admin':
+        return render_template('back/back_acceuil.html', Produits = Produits_data, Client = Client_data)
+    else :
+        return render_template('index.html', erreur = "Vous n'avez pas les droits d'accès", Produits = Produits_data, Client = Client_data)
+
+@app.route('/admin/update_role/<user_id>')
+def update_role(user_id):
+    if 'CLient' in session and session['role'] == 'admin':
+        new_role = request.form.get('role')
+        db['Client'].update_one({"_id" : ObjectId(user_id)}, {"$set" : {"role" : new_role}})
+
+    return redirect(url_for('admin'))
+
+@app.route('/admin/delete_client/<user_id>')
+def delete_user(user_id):
+    if 'CLient' in session and session['role'] == 'admin':
+        db['Client'].delete_one({"_id" : ObjectId(user_id)})
+
+    return redirect(url_for('admin'))
+
+    
+
 
 
 

@@ -1,0 +1,68 @@
+{% extends '/back_base.html' %}
+
+{% block content %}
+
+<main>
+    <h1>Client</h1>
+    <section>
+        <table>
+            <thead>
+                <th>nom</th>
+                <th>adresse mail</th>
+                <th>role</th>
+             </thead>
+             <tbody>
+                {% for Client in Client} 
+                <tr>
+                    <td>{{Client['nom']}}</td>
+                    <td>
+                        <form action="{{url_for('update_role', user_id = Client['_id'])}}" method="POST">
+                          <select name="role" onchange="this.form.submit()">
+                            <option value = "client" {% if Client ['role']== 'client %'} selected {% endif %}>client</option>
+                            <option value = "client" {% if Client ['role']== 'client %'} selected {% endif %}>client</option>
+
+                          </select>       
+                         </form>
+                    </td>
+                    <td><a href="'Voir'"></a></td>
+                    <td><a href="{{ url_for('delete_client', client_id=Client['_id'])}}" onclick="return confirm('supprimer ce compte ?')"> supprimer </a></td>
+                </tr>
+                {% endfor%}
+             </tbody>
+        </table>
+    </section> 
+
+    <h1>Produits</h1>
+
+    <section>
+        <table>
+            <thead>
+                <th>apiculteur</th>
+                <th>nom</th>
+                <th>prix</th>
+             </thead>
+             <tbody>
+                {% for Produit in Produits} 
+                <tr>
+                    <td>{{Produit['api']}}</td>
+                    <td>{{Produit['nom']}}</td>
+                    <td>{{Produit['prix']}}</td>
+                   
+                    <td><a href="'Voir'"></a></td>
+                    <td><a href="'modifier'"></a></td>
+                    <td><a href="'modifier'"></a></td>
+                   
+                </tr>
+                {% endfor %}
+
+             </tbody>
+        </table>
+    </section> 
+
+
+
+</main>
+
+
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylsheet" type="text/css" href="../../static/style.css">
+    <script defer src="../../static/scipt.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header class="bg-white-500 flex justify-between">
+    <h1 class="text-2xl rounded-lg p-8 scroll-ml-6 font-serif" style="color:rgb(63, 0, 0)">Hexamiel Admin</h1>
+    <nav class="flex space-x-10 text_lg " >
+        <div> 
+            <h3>Espace administration</h3>
+        </div>
+        <ul>
+            <section class="grid grid-cols-6 grid-rows-0 gap-6 p-10 font-serif ">
+                {% if session['role'] == 'admin' %} 
+                <li> <a href="/back_acceuil">Acceuil</a></li>
+                <li> <a href="/boutique">Boutique</a></li>
+                <li> <a href="page_apiculteur.html">Apiculteur</a></li>
+             
+                {%else%}
+                <li> <a href="/">Acceuil</a></li>
+                <li> <a href="/boutique">Boutique</a></li>
+                <li> <a href="/page_apiculteur">Apiculteur</a></li>
+                <li> <a href="A_propos.html">A propos</a></li>
+                <li> <a href="Panier.html">Panier</a></li>
+                <li> <a href="/connexion_client">connexion</a></li>
+                {%endif%}
+
+            </section>
+
+
+        </ul>
+
+
+    </nav>
+    </header>
+
+
+    {% block content %}
+    {% endblock %}
+
+
+
+    <footer class="flex justify-between rounded-md">
+        <h1 class= "text-xl rounded-lg p-8 scroll-ml-6 font-serif" style="color:rgb(0, 0, 0)">copyright</h1>
+        <nav class="flex space-x-10 text_lg font-semibold" >
+        <ul>
+            <section class="grid grid-cols-3 grid-rows-0 gap-6 p-5 font-serif ">
+               <a>Paul</a>
+               <a>Medda</a>
+               <a>2026</a>
+
+            </section>
+
+
+        </ul>
+
+
+    </nav>
+
+    </footer>
+
+
+</body>
+</html>
