@@ -32,7 +32,7 @@ def boutique():
 @app.route("/page_apiculteur")
 def page_apiculteur():
     Api_data = list(db["Apiculteur"].find({}))
-    return render_template('front/page_apiculteur.html', Api = Api_data)
+    return render_template('front/page_apiculteur.html', Apiculteur = Api_data)
 
 
 @app.route('/connexion_client' , methods=['POST', 'GET'])
@@ -97,10 +97,11 @@ def insertion_client():
 def admin():
     Produits_data = list(db["Produits"].find({}))
     Client_data = list(db["Client"].find({}))
+    Api_data = list(db["Apiculteur"].find({}))
     if 'Client' in session and session['role'] == 'admin':
         return render_template('back/back_acceuil.html', Produits = Produits_data, Client = Client_data)
     else :
-        return render_template('index.html', erreur = "Vous n'avez pas les droits d'accès", Produits = Produits_data, Client = Client_data)
+        return render_template('index.html', erreur = "Vous n'avez pas les droits d'accès", Produits = Produits_data, Client = Client_data, Apiculteur = Api_data)
 
 @app.route('/admin/update_role/<user_id>')
 def update_role(user_id):
