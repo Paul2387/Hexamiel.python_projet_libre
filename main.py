@@ -91,6 +91,14 @@ def insertion_client():
                 db["Client"].insert_one(nouvel_utilisateur)
 
                 return redirect("/")
+            
+
+
+@app.route('/page_produit')
+def page_produit():
+    Produits_data = list(db["Produits"].find({}))
+    return render_template('front/page_produit.html', Produits = Produits_data)
+
 
 ##Admin##
 @app.route('/admin')
@@ -103,17 +111,17 @@ def admin():
     else :
         return render_template('index.html', erreur = "Vous n'avez pas les droits d'accès", Produits = Produits_data, Client = Client_data, Apiculteur = Api_data)
 
-@app.route('/admin/update_role/<user_id>')
+@app.route('/admin/update_role/<user_id>', methods=['POST'])
 def update_role(user_id):
-    if 'CLient' in session and session['role'] == 'admin':
+    if 'Client' in session and session['role'] == 'admin':
         new_role = request.form.get('role')
         db['Client'].update_one({"_id" : ObjectId(user_id)}, {"$set" : {"role" : new_role}})
 
     return redirect(url_for('admin'))
 
-@app.route('/admin/delete_client/<user_id>')
+@app.route('/admin/delete_user/<user_id>')
 def delete_user(user_id):
-    if 'CLient' in session and session['role'] == 'admin':
+    if 'Client' in session and session['role'] == 'admin':
         db['Client'].delete_one({"_id" : ObjectId(user_id)})
 
     return redirect(url_for('admin'))

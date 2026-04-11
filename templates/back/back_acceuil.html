@@ -1,4 +1,4 @@
-{% extends '/back_base.html' %}
+{% extends 'back/back_base.html' %}
 
 {% block content %}
 
@@ -18,14 +18,14 @@
                     <td>
                         <form action="{{url_for('update_role', user_id = Client['_id'])}}" method="POST">
                           <select name="role" onchange="this.form.submit()">
-                            <option value = "client" {% if Client ['role']== 'client %'} selected {% endif %}>client</option>
-                            <option value = "client" {% if Client ['role']== 'client %'} selected {% endif %}>client</option>
+                            <option value = "admin" {% if Client['role'] == 'admin' %} selected {% endif %}>admin</option>
+                            <option value = "client" {% if Client['role'] == 'client' %} selected {% endif %}>client</option>
 
                           </select>       
                          </form>
                     </td>
                     <td><a href="'Voir'"></a></td>
-                    <td><a href="{{ url_for('delete_client', client_id=Client['_id'])}}" onclick="return confirm('supprimer ce compte ?')"> supprimer </a></td>
+                    <td><a href="{{ url_for('delete_user', user_id=Client['_id'])}}" onclick="return confirm('supprimer ce compte ?')"> supprimer </a></td>
                 </tr>
                 {% endfor%}
              </tbody>
@@ -42,7 +42,7 @@
                 <th>prix</th>
              </thead>
              <tbody>
-                {% for Produit in Produits} 
+                {% for Produit in Produits %} 
                 <tr>
                     <td>{{Produit['api']}}</td>
                     <td>{{Produit['nom']}}</td>

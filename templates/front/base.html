@@ -22,12 +22,21 @@
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="profil_utilisateur.html">Profil</a></li>
                 {%else%}
-                   <li> <a href="/">Acceuil</a></li>
+                {% if session['role'] == 'api' %} 
+                <li> <a href="/">Acceuil</a></li>
+                <li> <a href="/boutique">Boutique</a></li>
+                <li> <a href="page_apiculteur.html">Apiculteur</a></li>
+                <li> <a href="A_propos.html">A propos</a></li>
+                <li> <a href="Panier.html">Panier</a></li>
+                <li> <a href="profil_utilisateur.html">Profil</a></li>
+                {%else%}
+                <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
                 <li> <a href="/page_apiculteur">Apiculteur</a></li>
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="/connexion_client">connexion</a></li>
+                {%endif%}
                 {%endif%}
 
             </section>
