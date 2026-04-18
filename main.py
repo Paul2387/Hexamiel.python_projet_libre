@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from werkzeug.utils import secure_filename
 import os
 import bcrypt
 from bson.objectid import ObjectId
@@ -15,6 +16,8 @@ mongo = os.getenv('MONGO_URI')
 client = MongoClient(mongo)
 db = client.get_database("Hexamiel")
 app.secret_key = os.urandom(24)
+
+TAGS = ["colza", "lavande", "fleurs"]
 
 
 @app.route('/')
@@ -98,6 +101,41 @@ def insertion_client():
 def page_produit():
     Produits_data = list(db["Produits"].find({}))
     return render_template('front/page_produit.html', Produits = Produits_data)
+
+
+##publication d'un miel
+@app.route("/miel/add")
+def nouveau_miel():
+    return render_template("front/nouveau_miel.html", tags = TAGS)
+
+
+@app.route("/miel/create", methods = ['POST'])
+def create_miel():
+    nom = request.form['nom']
+    description = request.form['description']
+    tags = request.form.getlist("tags")
+
+    image = request.Files['image']
+    
+    if image:
+        nom_fichier = secure_filename(image.filename)
+        upload_path = os.path.join(app.static.folder, "images/miel_user", nom_fichier)
+        image.save(upload_path)
+        image_path = f"/static/images/miel_user/{nom_fichier}"
+    
+    else : image_path = ""
+
+    miel = {
+        "nom" : nom,
+        "image" : image_path,
+        "description" : description,
+        "tags" : tags,
+    }
+    db["Produits"].insert_one(miel)
+
+
+
+
 
 
 ##Admin##
