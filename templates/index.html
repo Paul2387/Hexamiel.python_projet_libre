@@ -32,6 +32,7 @@
                 <hr> 
                 <p class="flex justify-center">{{Produit["prix"]}}€</p>
                 <p> crée par {{Produit["api"]}}</p>
+                <a href="{{url_for('show_Produit', Produit_id=Produit['_id'])}}">voir</a>
             </section>
 
             {%endfor%}

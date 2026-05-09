@@ -32,6 +32,13 @@ def boutique():
     Produits_data = list(db["Produits"].find({}))
     return render_template('front/boutique.html', Produits = Produits_data)
 
+
+@app.route("/page_produit/<Produit_id>")
+def show_Produit(Produit_id):
+    Produit = list(db["Produits"].find_one({"_id": ObjectId(Produit_id)}))
+    return render_template('front/page_produit.html', Produit = Produit)
+
+
 @app.route("/page_apiculteur")
 def page_apiculteur():
     Api_data = list(db["Apiculteur"].find({}))
@@ -97,10 +104,6 @@ def insertion_client():
             
 
 
-@app.route('/page_produit')
-def page_produit():
-    Produits_data = list(db["Produits"].find({}))
-    return render_template('front/page_produit.html', Produits = Produits_data)
 
 
 ##publication d'un miel
