@@ -33,6 +33,20 @@
                 <p class="flex justify-center">{{Produit["prix"]}}€</p>
                 <p> crée par {{Produit["api"]}}</p>
                 <a href="{{url_for('show_Produit', Produit_id=Produit['_id'])}}">voir</a>
+
+                <div>
+                    <!--compteur_de_like-->
+                    <span>{{Produit.likes}}</span>
+                    <a href="{{url_for('like_Produit', Produit_id = Produit._id)}}"
+                    class="">
+                    {% if session.get('util') in Produit.liked_by%}
+                        💔dislike
+                    {% else %}
+                        ❤️like
+                    {% endif %}
+                </a>
+                </div>
+
             </section>
 
             {%endfor%}
@@ -51,9 +65,13 @@
                 <hr> 
                 <h2 class="flex justify-center">{{Apiculteurs["nom"]}}</h2>
                 <p>{{Apiculteurs["contact"]}}</p>
+
+            
             </section>
 
             {%endfor%}
+
+    
 
 
             

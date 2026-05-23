@@ -19,6 +19,21 @@ app.secret_key = os.urandom(24)
 
 TAGS = ["colza", "lavande", "fleurs"]
 
+#update data
+result = db['Produits'].update_many({"$or" : [
+    {"tags" : {"$exists" : False}},
+    {"likes" : {"$exists" : False}},
+    {"liked_by" : {"$exists" : False}},
+]},
+    {
+        "$set" : { "tags" : [],
+                  "likes" : 0,
+                  "liked_by" : []
+                  }
+    }
+)
+
+print("database uploaded")
 
 @app.route('/')
 def index():
@@ -49,6 +64,7 @@ def page_apiculteur():
 def connexion_client(): 
     if request.method == "GET":
         return render_template("front/connexion_client.html")
+    
     
 
     db_Client = db["Client"]
@@ -118,7 +134,7 @@ def create_miel():
     description = request.form['description']
     tags = request.form.getlist("tags")
 
-    image = request.Files['image']
+    image = request.files['image']
     
     if image:
         nom_fichier = secure_filename(image.filename)
@@ -133,10 +149,41 @@ def create_miel():
         "image" : image_path,
         "description" : description,
         "tags" : tags,
+        "likes" : 0,
+        "liked_by" : []
     }
     db["Produits"].insert_one(miel)
 
+#likes
 
+@app.route("/Produit/like/<Produit_id>")
+def like_Produit(Produit_id):
+    if 'Client' not  in session:
+        return redirect(url_for('connexion_client'))
+
+    Client = session['Client']
+
+    Produit = db["Produits"].find_one({"_id" : ObjectId(Produit_id)})
+
+    if not Produit:
+        return redirect(url_for('index'))
+    
+    if Client in Produit.get("liked_by", []):
+        db['Produit'].update_one({"_id": ObjectId(Produit_id)},
+                             {"$inc" : {"likes" : -1},
+                              "$push" : {"liked_by" : Client}
+                              })
+    else :
+        db['Produits'].update_one({"_id": ObjectId(Produit_id)},
+                             {"$inc" : {"likes" : 1},
+                              "$push" : {"liked_by" : Client}
+                              })
+
+    
+    
+    return redirect(request.referrer)
+                             
+                             
 
 
 
