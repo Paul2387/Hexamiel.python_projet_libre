@@ -106,6 +106,15 @@ def insertion_client():
                 salt= bcrypt.gensalt()
                 mdp_hash = bcrypt.hashpw(mdp_crypte, salt)
 
+                if len(nom) < 4:
+                    return redirect (url_for("creation_client"))
+                
+                if len(mdp) < 5:
+                    return redirect (url_for("creation_client"))
+                
+                if mdp != request.form["confirme_mdp"]:
+                    return redirect (url_for("creation_client"))
+
                 nouvel_utilisateur = {
                     "nom" : nom,
                     "mdp" : mdp_hash,
