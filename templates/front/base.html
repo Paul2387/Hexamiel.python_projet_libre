@@ -14,21 +14,21 @@
     <nav class="flex space-x-10 text_lg " >
         <ul>
             <section class="grid grid-cols-6 grid-rows-0 gap-6 p-10 font-serif ">
-                {% if session['role'] == 'client' %} 
+                {% if session['role'] == "client" %} 
                 <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
                 <li> <a href="page_apiculteur.html">Apiculteur</a></li>
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
-                <li> <a href="profil_utilisateur.html">Profil</a></li>
+                <li> <a href="{{url_for('show_Client', Client_id=Client['_id'])}}">Profil</a></li>
                 {%else%}
-                {% if session['role'] == 'api' %} 
+                {% if session['role'] == "api" %} 
                 <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
                 <li> <a href="page_apiculteur.html">Apiculteur</a></li>
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
-                <li> <a href="profil_utilisateur.html">Profil</a></li>
+                <li> <a href="/profil_utilisateur">Profil</a></li>
                 {%else%}
                 <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>

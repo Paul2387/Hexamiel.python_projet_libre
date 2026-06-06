@@ -39,7 +39,12 @@ print("database uploaded")
 def index():
     Produits_data = list(db["Produits"].find({}))
     Api_data = list(db["Apiculteur"].find({}))
-    return render_template('index.html', Produits = Produits_data, Apiculteur = Api_data)
+    if 'Client' in session:
+        Client = db["Client"].find_one({"nom" : session["Client"]})
+    else:
+        Client = 0
+
+    return render_template('index.html', Produits = Produits_data, Apiculteur = Api_data, Client=Client)
 
 
 @app.route("/boutique")
@@ -52,6 +57,12 @@ def boutique():
 def show_Produit(Produit_id):
     Produit = list(db["Produits"].find_one({"_id": ObjectId(Produit_id)}))
     return render_template('front/page_produit.html', Produit = Produit)
+
+@app.route("/profil_utilisateur/<Client_id>")
+def show_Client(Client_id):
+    Client = list(db["Client"].find_one({"_id": ObjectId(Client_id)}))
+    Produits_data = list(db["Produits"].find({}))
+    return render_template('front/profil_utilisateur.html', Client = Client, Produits = Produits_data )
 
 
 @app.route("/page_apiculteur")
