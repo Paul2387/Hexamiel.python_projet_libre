@@ -64,6 +64,12 @@ def show_Client(Client_id):
     Produits_data = list(db["Produits"].find({}))
     return render_template('front/profil_utilisateur.html', Client = Client, Produits = Produits_data )
 
+@app.route("/profil_appiculteur/<Apiculteur_id>")
+def show_Apiculteur(Apiculteur_id):
+    Apiculteur = list(db["Apiculteur"].find_one({"_id": ObjectId(Apiculteur_id)}))
+    Produits_data = list(db["Produits"].find({}))
+    return render_template('front/profil_apiculteur.html', Apiculteur = Apiculteur, Produits = Produits_data )
+
 
 @app.route("/page_apiculteur")
 def page_apiculteur():
@@ -79,12 +85,20 @@ def connexion_client():
     
 
     db_Client = db["Client"]
+    db_Apiculteur = db["Apiculteur"]
     Client = db_Client.find_one({"nom" : request.form["Nom"]})
+    Apiculteur = db_Apiculteur.find_one({"nom":request.form["Nom"]})
     if Client:
         if bcrypt.checkpw(request.form["mdp"].encode("utf-8"), Client["mdp"]):
             session['role'] = Client['role']
             session['Client'] = Client["nom"]
             return redirect ("/")
+    elif Apiculteur:
+        if bcrypt.checkpw(request.form["mdp"].encode("utf-8"), Apiculteur["mdp"]):
+            session['role'] = Apiculteur['role']
+            session['Apiculteur'] = Apiculteur["nom"]
+            return redirect ("/")
+        
         else:
             return render_template('connexion_client.html',erreur = "les mots de passe doivent etre identiques")
    
@@ -138,7 +152,53 @@ def insertion_client():
 
                 return redirect("/")
             
+@app.route('/creation_api')
+def creation_api ():
+    return render_template("front/creation_apiculteur.html")
+            
+@app.route('/insertion_api', methods=['POST','GET'])
+def insertion_api():
 
+    if request.method == "POST":
+        db_Apiculteur = db["Apiculteur"]
+        if (db_Apiculteur.find_one({"nom" : request.form["Nom"]})):
+            return render_template("front/creation_apiculteur.html", erreur = "ce nom est deja utilisé")
+        else :
+            if (request.form["mdp"] == request.form["confirme_mdp"]):
+            
+
+                nom= request.form["Nom"]
+                mdp= request.form["mdp"]
+                contact= request.form["contact"]
+                description= request.form["description"]
+                lieu= request.form["lieu"]
+
+                mdp_crypte = mdp.encode("utf-8")
+                salt= bcrypt.gensalt()
+                mdp_hash = bcrypt.hashpw(mdp_crypte, salt)
+
+                if len(nom) < 4:
+                    return redirect (url_for("creation_apiculteur"))
+                
+                if len(mdp) < 5:
+                    return redirect (url_for("creation_apiculteur"))
+                
+                if mdp != request.form["confirme_mdp"]:
+                    return redirect (url_for("creation_apiculteur"))
+
+                nouvel_utilisateur = {
+                    "nom" : nom,
+                    "mdp" : mdp_hash,
+                    "contact" : contact,
+                    "description" : description,
+                    "lieu" : lieu,
+                    "role": "apiculteur"
+                    
+                }
+    
+                db["Apiculteur"].insert_one(nouvel_utilisateur)
+
+                return redirect("/")
 
 
 
@@ -236,7 +296,14 @@ def delete_user(user_id):
 
     
 
+@app.route('/erreur404')
+def error_404():
+    return render_template("front/erreur_404.html"), 404
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('front/erreur_404.html'), 404
 
+    
 
 app.run(host='0.0.0.0', port=81)

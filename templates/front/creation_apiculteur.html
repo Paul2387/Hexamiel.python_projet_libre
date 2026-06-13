@@ -1,0 +1,46 @@
+{%extends 'front/base.html'%}
+
+{%block content%}
+
+{%if erreur%}
+    <p> Erreur : {{erreur}}</p>
+{%endif%}
+
+<div class="flex justify-center gap-4 p-8 text-xl" >
+    <form method="POST" action = "{{url_for('insertion_api')}}" class="border-solid border-2 border-yellow-600 p-6 bg-yellow-200">
+        <div>
+            <label>utilisateur</label>
+            <input name="Nom" type="text" placeholder="nom de l'utilisateur" class="my-3">
+        </div>
+         <div>
+            <label>Email</label>
+            <input name="contact" type="text" placeholder="adresse mail" class="my-3">
+        </div>
+        <div>
+            <label>lieu de production</label>
+            <input name="lieu" type="text" placeholder="lieu" class="my-3">
+        </div>
+         <div>
+            <label>description</label>
+            <input name="description" type="text" placeholder="description" class="my-3">
+        </div>
+        <div>
+            <label>mot de passe</label>
+            <input name="mdp" type="text" placeholder="Entrez votre MDP" class="my-3">
+        </div>
+
+        <div>
+            <label>confirmer le mot de passe</label>
+            <input name="confirme_mdp" type="text" placeholder="Entrez votre MDP" class="my-3">
+        </div>
+        <div>
+        
+            <button type="submit" class="my-10 p-3 rounded bg-yellow-300 border-solid border-2 border-yellow-600">s'inscrire</button>
+            
+        </div>
+    </form>
+
+
+</div>
+
+{%endblock%}
