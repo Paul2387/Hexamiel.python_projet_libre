@@ -43,10 +43,8 @@ def index():
         Client = db["Client"].find_one({"nom" : session["Client"]})
     elif 'Apiculteur' in session: 
         Apiculteur = db["Apiculteur"].find_one({"nom" : session["Apiculteur"]})
-    else:
-        Client = 0
-        Apiculteur = 0
-    return render_template('index.html', Produits = Produits_data, Apiculteur = Api_data, Client=Client)
+    
+    return render_template('index.html', Produits = Produits_data, Api_data = Api_data, Client = Client, Apiculteur = Apiculteur) 
 
 
 @app.route("/boutique")
@@ -307,5 +305,5 @@ def page_not_found(error):
     return render_template('front/erreur_404.html'), 404
 
     
-
-app.run(host='0.0.0.0', port=81)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))

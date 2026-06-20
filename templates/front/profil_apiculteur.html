@@ -22,101 +22,43 @@
         </div>
     </div>
 
-    {% if session['role'] == 'client' %} 
-    <div class="flex justift-center p-6 bg-yellow-100">
-    <h1 class="font-bold font-serif text-l">publications</h1>
-    </div>
-
-    <div class="grid grid-cols-3 grid-rows-0 gap-4 p-8" >
-         {% for Produit in Produits[:3]%}
-
-            <section class="rounded-md p-6  bg-yellow-200 border-2 border-yellow-300">
-                <h1 class="flex justify-center"> Photo du miel </h1>
-                <h2 class="flex justify-center">{{Produit["nom"]}}</h2> 
-                <hr> 
-                <p class="flex justify-center">{{Produit["prix"]}}€</p>
-                <p> crée par {{Produit["api"]}}</p>
-                <a href="{{url_for('show_Produit', Produit_id=Produit['_id'])}}">voir</a>
-
-                <div>
-                    <!--compteur_de_like-->
-                    <span>{{Produit.likes}}</span>
-                    <a href="{{url_for('like_Produit', Produit_id = Produit._id)}}"
-                    class="">
-                    {% if session.get('util') in Produit.liked_by%}
-                        💔dislike
-                    {% else %}
-                        ❤️like
-                    {% endif %}
-                </a>
-                </div>
-
-            </section>
-
-            {% extends 'front/base.html' %}
-{% block content %}
-
-<main>
-    <div class="flex-justify-center p-8 rounded-lg bg-yellow-50">
-        <div class="bg-yellow-100 rounded-lg">
-            <section class="grid grid-cols-0 grid-rows-3">
-
-            <section class="flex justify-left font-bold font-serif text-3xl p-8">
-                <h1> Bienvenue {{ Apiculteur.nom }} !</h1>
-            
-            
-            </section>
-
-            <section>
-                <h2> Photo de profil</h2>
-            </section>
-
-            </section>
-            
-
-        </div>
-    </div>
-
-    {% if session['role'] == 'client' %} 
-    <div class="flex justift-center p-6 bg-yellow-100">
-    <h1 class="font-bold font-serif text-l">publications</h1>
-    </div>
-
-    <div class="grid grid-cols-3 grid-rows-0 gap-4 p-8" >
-         {% for Produit in Produits[:3]%}
-
-            <section class="rounded-md p-6  bg-yellow-200 border-2 border-yellow-300">
-                <h1 class="flex justify-center"> Photo du miel </h1>
-                <h2 class="flex justify-center">{{Produit["nom"]}}</h2> 
-                <hr> 
-                <p class="flex justify-center">{{Produit["prix"]}}€</p>
-                <p> crée par {{Produit["api"]}}</p>
-                <a href="{{url_for('show_Produit', Produit_id=Produit['_id'])}}">voir</a>
-
-                <div>
-                    <!--compteur_de_like-->
-                    <span>{{Produit.likes}}</span>
-                    <a href="{{url_for('like_Produit', Produit_id = Produit._id)}}"
-                    class="">
-                    {% if session.get('util') in Produit.liked_by%}
-                        💔dislike
-                    {% else %}
-                        ❤️like
-                    {% endif %}
-                </a>
-                </div>
-
-            </section>
-
-            <button class="rounded-md p-6  bg-yellow-400 font-bold font-serif text-l "><a href="/miel/create">nouvau miel </a></button>
-
-            {%endfor%}
-    </div>
-
-            {%endfor%}
     
- 
+    <div class="flex justift-center p-6 bg-yellow-100">
+    <h1 class="font-bold font-serif text-l">publications</h1>
+    </div>
 
+    <div class="grid grid-cols-3 grid-rows-0 gap-4 p-8" >
+         {% for Produit in Produits[:3]%}
+
+            <section class="rounded-md p-6  bg-yellow-200 border-2 border-yellow-300">
+                <h1 class="flex justify-center"> Photo du miel </h1>
+                <h2 class="flex justify-center">{{Produit["nom"]}}</h2> 
+                <hr> 
+                <p class="flex justify-center">{{Produit["prix"]}}€</p>
+                <p> crée par {{Produit["api"]}}</p>
+                <a href="{{url_for('show_Produit', Produit_id=Produit['_id'])}}">voir</a>
+
+                <div>
+                    <!--compteur_de_like-->
+                    <span>{{Produit.likes}}</span>
+                    <a href="{{url_for('like_Produit', Produit_id = Produit._id)}}"
+                    class="">
+                    {% if session.get('util') in Produit.liked_by%}
+                        💔dislike
+                    {% else %}
+                        ❤️like
+                    {% endif %}
+                </a>
+                </div>
+
+            </section>
+
+    <div class="flex justify-center p-10 bg-yellow-100">
+
+        <button class="rounded-md p-6  bg-yellow-400 font-bold font-serif text-l "><a href="/miel/add">publier un nouveau miel </a></button>
+
+
+    </div>
 
 
 {% endblock %}

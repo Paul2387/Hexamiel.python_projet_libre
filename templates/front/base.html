@@ -21,8 +21,7 @@
                 <li> <a href="A_propos.html">A propos</a></li>
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="{{url_for('show_Client', Client_id=Client['_id'])}}">Profil</a></li>
-                {%else%}
-                {% if session['role'] == "apiculteur" %} 
+                {%elif session['role'] == "apiculteur"  %}
                 <li> <a href="/">Acceuil</a></li>
                 <li> <a href="/boutique">Boutique</a></li>
                 <li> <a href="page_apiculteur.html">Apiculteur</a></li>
@@ -37,7 +36,7 @@
                 <li> <a href="Panier.html">Panier</a></li>
                 <li> <a href="/connexion_client">connexion</a></li>
                 {%endif%}
-                {%endif%}
+                
 
             </section>
 
