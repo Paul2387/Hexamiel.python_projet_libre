@@ -41,9 +41,11 @@ def index():
     Api_data = list(db["Apiculteur"].find({}))
     if 'Client' in session:
         Client = db["Client"].find_one({"nom" : session["Client"]})
+    elif 'Apiculteur' in session: 
+        Apiculteur = db["Apiculteur"].find_one({"nom" : session["Apiculteur"]})
     else:
         Client = 0
-
+        Apiculteur = 0
     return render_template('index.html', Produits = Produits_data, Apiculteur = Api_data, Client=Client)
 
 
